@@ -16,6 +16,7 @@ public class ItemController {
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
     }
+    @CrossOrigin
     @GetMapping("/all")
     public Iterable<Item> getItems() {
         return itemService.findAll();
@@ -26,21 +27,18 @@ public class ItemController {
         return itemService.save(itemDto);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public Item getItemById(@PathVariable Integer id) {
         return itemService.findById(id);
     }
-
-    @PutMapping( "/{id}" )
-    public Item update( @RequestBody ItemDto itemDto, @PathVariable Integer id )
+     @CrossOrigin
+    @PutMapping( "update/{id}" )
+    public Item update( @RequestBody ItemDto itemDto, @PathVariable("id") Integer itemId )
     {
-        Item item = itemService.findById( id );
-        item.setName( itemDto.getName() );
-        item.setDescription( itemDto.getDescription() );
-        item.setImageURL( itemDto.getImageURL() );
-        return itemService.save(itemDto);
+        return itemService.update(itemDto,itemId);
     }
-
+    @CrossOrigin
     @DeleteMapping( "/{id}" )
     public void delete( @PathVariable Integer id )
     {

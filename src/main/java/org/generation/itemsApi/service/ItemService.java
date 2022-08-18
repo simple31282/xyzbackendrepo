@@ -8,8 +8,8 @@ import java.util.List;
 public interface ItemService {
     Item save( ItemDto itemDto );
 
-    boolean delete( Integer itemId );
-
+    void delete( Integer itemId );
+    Item update(ItemDto itemDTO, Integer itemId);
     Iterable<Item> findAll();
 
     Item findById( Integer itemId );
